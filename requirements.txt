@@ -1,0 +1,5 @@
+Jinja2==2.8
+MarkupSafe==0.23
+argparse==1.2.1
+webapp2==2.5.2
+wsgiref==0.1.2

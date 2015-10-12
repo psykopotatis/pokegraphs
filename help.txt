@@ -1,0 +1,22 @@
+1. Create virtual environment
+virtualenv venv
+
+2. Start virtual environment
+source venv/bin/activate
+
+3. Install all python requirements
+pip install -r requirements.txt
+
+4. Start server
+dev_appserver.py app.yaml
+
+5. Another terminal. Install all npm requirements
+npm install
+
+6. Start webpack watcher
+webpack --watch
+
+--
+
+# Deploy live
+appcfg.py -A pokequiz update app.yaml
