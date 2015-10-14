@@ -23,6 +23,7 @@ const PokeView = Backbone.View.extend({
                 console.log('fetched pokeId:' + randomPokeId, model);
 
                 that.pixels = model.get('pixels');
+                that.colors = model.get('colors')
 
                 that.render();
             },
@@ -37,7 +38,7 @@ const PokeView = Backbone.View.extend({
         var compiledTemplate = _.template(indexTemplate);
         this.$el.html(compiledTemplate);
 
-        // this.drawColorBlocks();
+        this.drawColorBlocks();
         this.drawPokemon();
     },
 
