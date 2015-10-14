@@ -2,15 +2,16 @@ from __future__ import print_function
 
 from PIL import Image
 from collections import Counter
+import json
 
 
-def read_image():
-    image = Image.open("static/images/pokemons/85.png")
+def read_image(poke_id):
+    image = Image.open("static/images/pokemons/%s.png" % poke_id)
     rgb_image = image.convert('RGBA')
     width, height = image.size
 
-    json_image = [[0 for x in range(96)] for x in range(96)]
-    hex_colors = []
+    pixels = [[0 for x in range(96)] for x in range(96)]
+    all_colors = []
     for x in range(0, width):
         for y in range(0, height):
             r, g, b, a = rgb_image.getpixel((x, y))
@@ -19,30 +20,32 @@ def read_image():
                 continue
             else:
                 hex_color = '#%02x%02x%02x' % (r, g, b)
-                hex_colors.append(hex_color)
-                json_image[x][y] = hex_color
+                all_colors.append(hex_color)
+                pixels[x][y] = hex_color
 
-    print(json_image)
-    most_common = Counter(hex_colors).most_common()
-    print(most_common)
-
-    result = []
+    most_common = Counter(all_colors).most_common()
+    # Get total number of colored pixels
     colored_pixels = 0
     for c in most_common:
         colored_pixels += c[1]
-    print('all_pixels', 96 * 96)
-    print('colored_pixels', colored_pixels)
 
+    # Get each color's part of total number of colored pixels
+    color_chart = []
+    colors = []
     for c in most_common:
         hex_color = c[0]
-        pixels = c[1]
-        percent_of_all = pixels / float(colored_pixels) * 100
-        print(percent_of_all)
-        result.append(hex_color)
-    print(result)
+        colors.append(hex_color)
+        percent_of_all = c[1] / float(colored_pixels) * 100
+        color_chart.append((hex_color, percent_of_all))
 
-    f = open('apa.txt', 'w')
-    f.write(str(json_image))
+    image_data = {"pixels": pixels, "colors": colors}
+    poke_file = 'static/js/poke/%s.json' % poke_id
+    f = open(poke_file, 'w')
+    f.write(json.dumps(image_data))
     f.close()
+    print('saved: %s' % poke_file)
 
-read_image()
+
+
+for idx in range(1, 650):
+    read_image(idx)
