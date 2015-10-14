@@ -16,10 +16,11 @@ const PokeView = Backbone.View.extend({
 
         var that = this;
 
-        this.pokeModel = new PokeModel({ id: '85.json' });
+        const randomPokeId = Math.round(Math.random() * 650);
+        this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
         this.pokeModel.fetch({
             success: function(model) {
-                console.log('success');
+                console.log('fetched pokeId:' + randomPokeId, model);
 
                 that.pixels = model.get('pixels');
 
