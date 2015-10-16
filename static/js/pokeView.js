@@ -15,8 +15,7 @@ const PokeView = Backbone.View.extend({
         this.context = canvas.getContext('2d');
 
         this.calculateZoom();
-
-        var that = this;
+        this.calculateCenter();
 
         const randomPokeId = Math.round(Math.random() * 650);
         this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
@@ -39,6 +38,11 @@ const PokeView = Backbone.View.extend({
         const smallestSide = Math.min(window.innerWidth, window.innerHeight);
         this.zoom = Math.floor(smallestSide / 96);
         console.log('zoom=', this.zoom);
+    },
+
+    calculateCenter: function() {
+        this.x = (window.innerWidth - (this.zoom * 96)) / 2;
+        this.y = (window.innerHeight - (this.zoom * 96)) / 2;
     },
 
     render: function() {
@@ -71,7 +75,7 @@ const PokeView = Backbone.View.extend({
             for (let y=0; y < 96; y++) {
                 const color = this.pixels[x][y];
                 if (color !== 0) {
-                    this.drawPixel(x * this.zoom, y * this.zoom, color);
+                    this.drawPixel(this.x + (x * this.zoom), this.y + (y * this.zoom), color);
                 }
             }
         }
