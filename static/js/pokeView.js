@@ -14,39 +14,47 @@ const PokeView = Backbone.View.extend({
         canvas.height = window.innerHeight;
         this.context = canvas.getContext('2d');
 
+        this.calculateZoom();
+
         var that = this;
 
         const randomPokeId = Math.round(Math.random() * 650);
         this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
         this.pokeModel.fetch({
-            success: function(model) {
-                console.log('fetched pokeId:' + randomPokeId, model);
+            success: (model) => {
+                console.log('fetched pokeId:' + randomPokeId, model.toJSON());
 
-                that.pixels = model.get('pixels');
-                that.colors = model.get('colors')
+                this.pixels = model.get('pixels');
+                this.colors = model.get('colors')
 
-                that.render();
+                this.render();
             },
-            error: function(model, response, options) {
-                console.log('error', response);
-
+            error: (model, response) => {
+                console.log('error', model, response);
             }
         });
     },
 
-    render: function() {
-        var compiledTemplate = _.template(indexTemplate);
-        this.$el.html(compiledTemplate);
-
-        this.drawColorBlocks();
-        this.drawPokemon();
+    calculateZoom: function() {
+        const smallestSide = Math.min(window.innerWidth, window.innerHeight);
+        this.zoom = Math.floor(smallestSide / 96);
+        console.log('zoom=', this.zoom);
     },
 
-    drawColorBlocks: function() {
-        var that = this;
+    render: function() {
+        this.renderTemplate();
+        this.renderColorBlocks();
+        this.renderPokemon();
+    },
 
-        _.each(this.colors, function(color) {
-            that.$el.append('<div class="color-block" style="background-color:' + color + '" />');
+    renderTemplate() {
+        var compiledTemplate = _.template(indexTemplate);
+        this.$el.html(compiledTemplate);
+    },
+
+    renderColorBlocks: function() {
+        _.each(this.colors, (color) => {
+            this.$el.append('<div class="color-block" style="background-color:' + color + '" />');
         });
 
         this.setColorBlockHeights();
@@ -58,12 +66,12 @@ const PokeView = Backbone.View.extend({
         this.$el.find('.color-block').css('height', blockHeight + '%');
     },
 
-    drawPokemon: function() {
+    renderPokemon: function() {
         for (let x=0; x < 96; x++) {
             for (let y=0; y < 96; y++) {
                 const color = this.pixels[x][y];
                 if (color !== 0) {
-                    this.drawPixel(x*10, y*10, color);
+                    this.drawPixel(x * this.zoom, y * this.zoom, color);
                 }
             }
         }
@@ -71,7 +79,7 @@ const PokeView = Backbone.View.extend({
 
     drawPixel: function(x, y, color) {
         this.context.fillStyle = color;
-        this.context.fillRect(x, y, 10, 10);
+        this.context.fillRect(x, y, this.zoom, this.zoom);
     },
 
     click: function() {
