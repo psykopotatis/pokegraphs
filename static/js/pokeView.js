@@ -17,7 +17,7 @@ const PokeView = Backbone.View.extend({
         this.calculateZoom();
         this.calculateCenter();
 
-        const randomPokeId = Math.round(Math.random() * 650);
+        const randomPokeId = Math.round(Math.random() * 649);
         this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
         const name = this.pokeModel.getName(randomPokeId);
         this.$el.find('#info').html(randomPokeId + '.' + name);
@@ -28,7 +28,8 @@ const PokeView = Backbone.View.extend({
                 console.log('fetched pokeId:' + randomPokeId, model.toJSON());
 
                 this.pixels = model.get('pixels');
-                this.colors = model.get('colors')
+                this.colors = model.get('colors');
+                this.lightest = model.get('lightest');
 
                 this.render();
             },
@@ -50,8 +51,13 @@ const PokeView = Backbone.View.extend({
     },
 
     render: function() {
+        this.renderBackground();
         this.renderColorBlocks();
         this.renderPokemon();
+    },
+
+    renderBackground() {
+        this.$el.css('background-color', this.lightest);
     },
 
     renderTemplate() {
