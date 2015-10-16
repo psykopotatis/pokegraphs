@@ -1,3 +1,14 @@
+body {
+    font-family: 'Press Start 2P', cursive;
+}
+
+#info {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 25px;
+}
+
 #canvas {
     display: block;
     position: absolute;

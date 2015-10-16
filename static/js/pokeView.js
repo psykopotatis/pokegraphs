@@ -2,7 +2,7 @@ var indexTemplate = require("text!./templates/index.html");
 var PokeModel = require("./pokeModel");
 
 const PokeView = Backbone.View.extend({
-    el: $('#backbone'),
+    el: $('#pokequiz'),
 
     events: {
         'click .btn': 'click'
@@ -19,6 +19,10 @@ const PokeView = Backbone.View.extend({
 
         const randomPokeId = Math.round(Math.random() * 650);
         this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
+        const name = this.pokeModel.getName(randomPokeId);
+        this.$el.find('#info').html(randomPokeId + '.' + name);
+
+
         this.pokeModel.fetch({
             success: (model) => {
                 console.log('fetched pokeId:' + randomPokeId, model.toJSON());
@@ -46,7 +50,6 @@ const PokeView = Backbone.View.extend({
     },
 
     render: function() {
-        this.renderTemplate();
         this.renderColorBlocks();
         this.renderPokemon();
     },
@@ -58,14 +61,14 @@ const PokeView = Backbone.View.extend({
 
     renderColorBlocks: function() {
         _.each(this.colors, (color) => {
-            this.$el.append('<div class="color-block" style="background-color:' + color + '" />');
+            this.$el.find('#blocks').append('<div class="color-block" style="background-color:' + color + '" />');
         });
 
         this.setColorBlockHeights();
     },
 
     setColorBlockHeights: function() {
-        this.$el.css('height', window.innerHeight + 'px');
+        this.$el.find('#blocks').css('height', window.innerHeight + 'px');
         const blockHeight = (window.innerHeight / this.colors.length) / window.innerHeight * 100;
         this.$el.find('.color-block').css('height', blockHeight + '%');
     },
