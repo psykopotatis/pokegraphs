@@ -35,7 +35,8 @@ def read_image(poke_id):
                 white = 255 + 255 + 255
                 if white > candidate_lightest > lightest:
                     lightest = candidate_lightest
-                    lightest_color = hex_color
+                    # lightest_color = hex_color
+                    lightest_color = 'rgba(%s,%s,%s,0.35)' % (r, g, b)
 
     most_common = Counter(all_colors).most_common()
     # Get total number of colored pixels
@@ -44,13 +45,20 @@ def read_image(poke_id):
         colored_pixels += c[1]
 
     # Get each color's part of total number of colored pixels
-    color_chart = []
+        """
+        [{
+            name: 'Microsoft Internet Explorer',
+            y: 56.33,
+            color: '#fff'
+        }, {
+                """
     colors = []
     for c in most_common:
         hex_color = c[0]
-        colors.append(hex_color)
+
         percent_of_all = c[1] / float(colored_pixels) * 100
-        color_chart.append((hex_color, percent_of_all))
+        data_point = {"name": hex_color, "y": percent_of_all, "color": hex_color}
+        colors.append(data_point)
 
     image_data = {"pixels": pixels, "colors": colors, "lightest": lightest_color}
     poke_file = 'static/js/poke/%s.json' % poke_id

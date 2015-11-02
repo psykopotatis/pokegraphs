@@ -12,10 +12,6 @@ module.exports = {
             mangle: false
         }),
         new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        }),
-        new webpack.ProvidePlugin({
             "_": "underscore"
         }),
         new webpack.ProvidePlugin({

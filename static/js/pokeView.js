@@ -16,6 +16,7 @@ const PokeView = Backbone.View.extend({
 
         this.calculateZoom();
         this.calculateCenter();
+        this.calculateChartHeight();
 
         const randomPokeId = Math.round(Math.random() * 649);
         this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
@@ -50,9 +51,14 @@ const PokeView = Backbone.View.extend({
         this.y = (window.innerHeight - (this.zoom * 96)) / 2;
     },
 
+    calculateChartHeight: function() {
+        $('#charts').css('height', window.innerHeight);
+    },
+
     render: function() {
         this.renderBackground();
-        this.renderColorBlocks();
+        this.drawCharts();
+        // this.renderColorBlocks();
         this.renderPokemon();
     },
 
@@ -63,6 +69,48 @@ const PokeView = Backbone.View.extend({
     renderTemplate() {
         var compiledTemplate = _.template(indexTemplate);
         this.$el.html(compiledTemplate);
+    },
+
+
+    drawCharts: function() {
+        $('#charts').highcharts({
+            chart: {
+                type: 'column',
+                backgroundColor: this.lightest
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                type: 'category',
+        minPadding: 0,
+        maxPadding: 0
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.1f}%'
+                    }
+                }
+            },
+            exporting: { enabled: false },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: this.colors
+            }]
+
+        });
     },
 
     renderColorBlocks: function() {

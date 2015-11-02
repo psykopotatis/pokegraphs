@@ -15,6 +15,9 @@ body {
     top: 0;
     left: 0;
 }
+#charts {
+    width:100%;
+}
 .color-block {
     display: block;
     width: 100px;

@@ -1,3 +1,5 @@
 var PokeView = require("./pokeView");
 
-new PokeView();
+$(document).ready(function() {
+    new PokeView();
+});
