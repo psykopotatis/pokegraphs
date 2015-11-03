@@ -2,7 +2,7 @@ var indexTemplate = require("text!./templates/index.html");
 var PokeModel = require("./pokeModel");
 
 const PokeView = Backbone.View.extend({
-    el: $('#pokequiz'),
+    el: $('#pokegraphs'),
 
     events: {
         'click .btn': 'click'

@@ -19,7 +19,7 @@ webpack --watch
 --
 
 # Deploy live
-appcfg.py -A pokequiz update app.yaml
+appcfg.py -A pokegraphs update app.yaml
 
 
 --

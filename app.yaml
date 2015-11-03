@@ -1,4 +1,4 @@
-application: pokequiz-1097
+application: pokegraphs
 version: 1
 runtime: python27
 api_version: 1
