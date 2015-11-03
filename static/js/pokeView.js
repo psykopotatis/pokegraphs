@@ -76,8 +76,7 @@ const PokeView = Backbone.View.extend({
         $('#charts').highcharts({
             chart: {
                 type: 'column',
-                backgroundColor: this.lightest
-            },
+                backgroundColor: 'rgba(255, 255, 255, 0)'},
             title: {
                 text: ''
             },
