@@ -57,7 +57,7 @@ const PokeView = Backbone.View.extend({
 
     render: function() {
         this.renderBackground();
-        this.drawCharts();
+        this.drawPieChart();
         // this.renderColorBlocks();
         this.renderPokemon();
     },
@@ -71,6 +71,39 @@ const PokeView = Backbone.View.extend({
         this.$el.html(compiledTemplate);
     },
 
+    drawPieChart: function() {
+        var data = [];
+
+        for (var i=0; i<this.colors.length; i++) {
+            if (i === 0) {
+                data.push({
+                    name: this.colors[i].color,
+                    y: this.colors[i].y,
+                    sliced: true,
+                    selected: true
+                });
+            } else {
+                data.push([
+                    this.colors[i].color,
+                    this.colors[i].y]
+                );
+            }
+        }
+
+        $('#charts').highcharts({
+            chart: {
+                type: 'pie',
+                backgroundColor: 'rgba(255, 255, 255, 0)'
+            },
+            title: {
+                text: ''
+            },
+            series: [{
+                type: 'pie',
+                data: data
+            }]
+        });
+    },
 
     drawCharts: function() {
         $('#charts').highcharts({
@@ -82,8 +115,8 @@ const PokeView = Backbone.View.extend({
             },
             xAxis: {
                 type: 'category',
-        minPadding: 0,
-        maxPadding: 0
+                minPadding: 0,
+                maxPadding: 0
             },
             yAxis: {
                 title: {
