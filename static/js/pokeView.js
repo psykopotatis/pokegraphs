@@ -5,7 +5,8 @@ const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
 
     events: {
-        'click .btn': 'click'
+        'click .fa-pie-chart': 'drawPieChart',
+        'click .fa-bar-chart': 'drawBarChart'
     },
 
     initialize: function() {
@@ -21,7 +22,7 @@ const PokeView = Backbone.View.extend({
         const randomPokeId = Math.round(Math.random() * 649);
         this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
         const name = this.pokeModel.getName(randomPokeId);
-        this.$el.find('#info').html(randomPokeId + '.' + name);
+        this.$el.find('#info .name').html(randomPokeId + '.' + name);
 
 
         this.pokeModel.fetch({
@@ -105,6 +106,7 @@ const PokeView = Backbone.View.extend({
             title: {
                 text: ''
             },
+            exporting: { enabled: false },
             series: [{
                 type: 'pie',
                 data: data
@@ -112,7 +114,7 @@ const PokeView = Backbone.View.extend({
         });
     },
 
-    drawCharts: function() {
+    drawBarChart: function() {
         $('#charts').highcharts({
             chart: {
                 type: 'column',

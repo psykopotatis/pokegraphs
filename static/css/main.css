@@ -7,6 +7,7 @@ body {
     top: 10px;
     right: 20px;
     font-size: 25px;
+    text-align: center;
 }
 
 #canvas {
