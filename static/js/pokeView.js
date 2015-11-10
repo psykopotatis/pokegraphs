@@ -73,8 +73,11 @@ const PokeView = Backbone.View.extend({
 
     drawPieChart: function() {
         var data = [];
+        var plotColors = [];
 
         for (var i=0; i<this.colors.length; i++) {
+            plotColors.push(this.colors[i].color);
+
             if (i === 0) {
                 data.push({
                     name: this.colors[i].color,
@@ -89,6 +92,10 @@ const PokeView = Backbone.View.extend({
                 );
             }
         }
+
+        Highcharts.setOptions({
+            colors: plotColors
+        });
 
         $('#charts').highcharts({
             chart: {
