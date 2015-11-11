@@ -10,25 +10,29 @@ const PokeView = Backbone.View.extend({
     },
 
     initialize: function() {
-        var canvas = document.getElementById('canvas');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        this.context = canvas.getContext('2d');
+        $(document).keydown(_.bind(this.onKeyDown, this));
+
+        this.canvas = document.getElementById('canvas');
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.context = this.canvas.getContext('2d');
 
         this.calculateZoom();
         this.calculateCenter();
         this.calculateChartHeight();
 
-        const randomPokeId = Math.round(Math.random() * 649);
-        this.pokeModel = new PokeModel({ id: randomPokeId + '.json' });
-        const name = this.pokeModel.getName(randomPokeId);
-        this.$el.find('#info .name').html(randomPokeId + '.' + name);
+        this.pokeId = Math.round(Math.random() * 649);
 
+        this.fetchPoke();
+    },
+
+    fetchPoke: function() {
+        this.pokeModel = new PokeModel({ id: this.pokeId + '.json' });
+        const name = this.pokeModel.getName(this.pokeId);
+        this.$el.find('#info .name').html(this.pokeId + '.' + name);
 
         this.pokeModel.fetch({
             success: (model) => {
-                console.log('fetched pokeId:' + randomPokeId, model.toJSON());
-
                 this.pixels = model.get('pixels');
                 this.colors = model.get('colors');
                 this.lightest = model.get('lightest');
@@ -44,7 +48,6 @@ const PokeView = Backbone.View.extend({
     calculateZoom: function() {
         const smallestSide = Math.min(window.innerWidth, window.innerHeight);
         this.zoom = Math.floor(smallestSide / 96);
-        console.log('zoom=', this.zoom);
     },
 
     calculateCenter: function() {
@@ -57,10 +60,15 @@ const PokeView = Backbone.View.extend({
     },
 
     render: function() {
+        this.clearCanvas();
         this.renderBackground();
         this.drawPieChart();
         // this.renderColorBlocks();
         this.renderPokemon();
+    },
+
+    clearCanvas: function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
 
     renderBackground() {
@@ -184,8 +192,27 @@ const PokeView = Backbone.View.extend({
         this.context.fillRect(x, y, this.zoom, this.zoom);
     },
 
-    click: function() {
-        console.log('click');
+    onKeyDown: function(e) {
+        e = e || window.event;
+
+        switch (e.keyCode) {
+            case 38:  // up arrow
+                this.pokeId++;
+                break;
+            case 40:  // down arrow
+                this.pokeId--;
+                break;
+            case 37:  // left arrow
+                this.pokeId--;
+                break;
+            case 39:  // right arrow
+                this.pokeId++;
+                break;
+            default:
+                return;
+        }
+
+        this.fetchPoke();
     }
 });
 
