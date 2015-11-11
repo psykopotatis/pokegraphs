@@ -1,5 +1,7 @@
 var indexTemplate = require("text!./templates/index.html");
 var PokeModel = require("./pokeModel");
+var drawPieChart = require("./pieChart");
+var drawBarChart = require("./barChart");
 
 const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
@@ -62,7 +64,7 @@ const PokeView = Backbone.View.extend({
     render: function() {
         this.clearCanvas();
         this.renderBackground();
-        this.drawPieChart();
+        drawPieChart(this.colors);
         // this.renderColorBlocks();
         this.renderPokemon();
     },
@@ -78,88 +80,6 @@ const PokeView = Backbone.View.extend({
     renderTemplate() {
         var compiledTemplate = _.template(indexTemplate);
         this.$el.html(compiledTemplate);
-    },
-
-    drawPieChart: function() {
-        var data = [];
-        var plotColors = [];
-
-        for (var i=0; i<this.colors.length; i++) {
-            plotColors.push(this.colors[i].color);
-
-            if (i === 0) {
-                data.push({
-                    name: this.colors[i].color,
-                    y: this.colors[i].y,
-                    sliced: true,
-                    selected: true
-                });
-            } else {
-                data.push([
-                    this.colors[i].color,
-                    this.colors[i].y]
-                );
-            }
-        }
-
-        Highcharts.setOptions({
-            colors: plotColors
-        });
-
-        $('#charts').highcharts({
-            chart: {
-                type: 'pie',
-                backgroundColor: 'rgba(255, 255, 255, 0)'
-            },
-            title: {
-                text: ''
-            },
-            exporting: { enabled: false },
-            series: [{
-                type: 'pie',
-                data: data
-            }]
-        });
-    },
-
-    drawBarChart: function() {
-        $('#charts').highcharts({
-            chart: {
-                type: 'column',
-                backgroundColor: 'rgba(255, 255, 255, 0)'},
-            title: {
-                text: ''
-            },
-            xAxis: {
-                type: 'category',
-                minPadding: 0,
-                maxPadding: 0
-            },
-            yAxis: {
-                title: {
-                    text: ''
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                series: {
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.y:.1f}%'
-                    }
-                }
-            },
-            exporting: { enabled: false },
-            series: [{
-                name: 'Brands',
-                colorByPoint: true,
-                data: this.colors
-            }]
-
-        });
     },
 
     renderColorBlocks: function() {
@@ -195,24 +115,23 @@ const PokeView = Backbone.View.extend({
     onKeyDown: function(e) {
         e = e || window.event;
 
-        switch (e.keyCode) {
-            case 38:  // up arrow
-                this.pokeId++;
-                break;
-            case 40:  // down arrow
-                this.pokeId--;
-                break;
-            case 37:  // left arrow
-                this.pokeId--;
-                break;
-            case 39:  // right arrow
-                this.pokeId++;
-                break;
-            default:
-                return;
+        if (e.keyCode == 38) {
+            // up
+            this.pokeId++;
+            this.fetchPoke();
+        } else if (e.keyCode == 40) {
+            // down
+            this.pokeId--;
+            this.fetchPoke();
+        } else if (e.keyCode == 37) {
+            // left
+            this.pokeId--;
+            this.fetchPoke();
+        } else if (e.keyCode == 39) {
+            // right
+            this.pokeId++;
+            this.fetchPoke();
         }
-
-        this.fetchPoke();
     }
 });
 
