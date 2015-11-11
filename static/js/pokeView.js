@@ -7,12 +7,23 @@ const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
 
     events: {
-        'click .fa-pie-chart': 'drawPieChart',
-        'click .fa-bar-chart': 'drawBarChart'
+        'click .fa-pie-chart': 'setPieChart',
+        'click .fa-bar-chart': 'setBarChart'
+    },
+
+    setPieChart: function() {
+        this.pokeRenderer = drawPieChart;
+        this.renderChart();
+    },
+
+    setBarChart: function() {
+        this.pokeRenderer = drawBarChart;
+        this.renderChart();
     },
 
     initialize: function() {
         $(document).keydown(_.bind(this.onKeyDown, this));
+        this.pokeRenderer = drawPieChart;
 
         this.canvas = document.getElementById('canvas');
         this.canvas.width = window.innerWidth;
@@ -26,6 +37,20 @@ const PokeView = Backbone.View.extend({
         this.pokeId = Math.round(Math.random() * 649);
 
         this.fetchPoke();
+    },
+
+    calculateZoom: function() {
+        const smallestSide = Math.min(window.innerWidth, window.innerHeight);
+        this.zoom = Math.floor(smallestSide / 96);
+    },
+
+    calculateCenter: function() {
+        this.x = (window.innerWidth - (this.zoom * 96)) / 2;
+        this.y = (window.innerHeight - (this.zoom * 96)) / 2;
+    },
+
+    calculateChartHeight: function() {
+        $('#charts').css('height', window.innerHeight);
     },
 
     fetchPoke: function() {
@@ -47,25 +72,10 @@ const PokeView = Backbone.View.extend({
         });
     },
 
-    calculateZoom: function() {
-        const smallestSide = Math.min(window.innerWidth, window.innerHeight);
-        this.zoom = Math.floor(smallestSide / 96);
-    },
-
-    calculateCenter: function() {
-        this.x = (window.innerWidth - (this.zoom * 96)) / 2;
-        this.y = (window.innerHeight - (this.zoom * 96)) / 2;
-    },
-
-    calculateChartHeight: function() {
-        $('#charts').css('height', window.innerHeight);
-    },
-
     render: function() {
         this.clearCanvas();
         this.renderBackground();
-        drawPieChart(this.colors);
-        // this.renderColorBlocks();
+        this.renderChart();
         this.renderPokemon();
     },
 
@@ -75,6 +85,10 @@ const PokeView = Backbone.View.extend({
 
     renderBackground() {
         this.$el.css('background-color', this.lightest);
+    },
+
+    renderChart: function() {
+        this.pokeRenderer(this.colors);
     },
 
     renderTemplate() {
