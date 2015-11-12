@@ -6,11 +6,14 @@ body {
     position: absolute;
     top: 10px;
     right: 20px;
-    font-size: 25px;
-    text-align: center;
 }
-#info .buttons a {
-    padding: 0 3px;
+#buttons {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+#buttons a {
+    padding: 0 2px;
 }
 
 #canvas {
