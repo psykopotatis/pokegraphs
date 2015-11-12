@@ -8,7 +8,8 @@ const PokeView = Backbone.View.extend({
 
     events: {
         'click .fa-pie-chart': 'setPieChart',
-        'click .fa-bar-chart': 'setBarChart'
+        'click .fa-bar-chart': 'setBarChart',
+        'click .fa-random': 'setRandom'
     },
 
     setPieChart: function() {
@@ -21,9 +22,25 @@ const PokeView = Backbone.View.extend({
         this.renderChart();
     },
 
+    setRandom: function() {
+        if (this.random) {
+            this.increment = this.plusplus;
+            this.decrement = this.minusminus;
+        } else {
+            this.increment = this.randomPoke;
+            this.decrement = this.randomPoke;
+        }
+
+        this.random = !this.random;
+    },
+
     initialize: function() {
         $(document).keydown(_.bind(this.onKeyDown, this));
+
         this.pokeRenderer = drawPieChart;
+        this.increment = this.plusplus;
+        this.decrement = this.minusminus;
+        this.random = false;
 
         this.canvas = document.getElementById('canvas');
         this.canvas.width = window.innerWidth;
@@ -34,8 +51,7 @@ const PokeView = Backbone.View.extend({
         this.calculateCenter();
         this.calculateChartHeight();
 
-        this.pokeId = Math.round(Math.random() * 649);
-
+        this.randomPoke();
         this.fetchPoke();
     },
 
@@ -126,24 +142,36 @@ const PokeView = Backbone.View.extend({
         this.context.fillRect(x, y, this.zoom, this.zoom);
     },
 
+    plusplus: function() {
+        this.pokeId++;  // todo check max
+    },
+
+    minusminus: function() {
+        this.pokeId--;  // todo check min
+    },
+
+    randomPoke: function() {
+        this.pokeId = Math.round(Math.random() * 649);
+    },
+
     onKeyDown: function(e) {
         e = e || window.event;
 
         if (e.keyCode == 38) {
             // up
-            this.pokeId++;
+            this.increment();
             this.fetchPoke();
         } else if (e.keyCode == 40) {
             // down
-            this.pokeId--;
+            this.decrement();
             this.fetchPoke();
         } else if (e.keyCode == 37) {
             // left
-            this.pokeId--;
+            this.decrement();
             this.fetchPoke();
         } else if (e.keyCode == 39) {
             // right
-            this.pokeId++;
+            this.increment();
             this.fetchPoke();
         }
     }
