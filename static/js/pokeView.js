@@ -12,17 +12,24 @@ const PokeView = Backbone.View.extend({
         'click .fa-random': 'setRandom'
     },
 
-    setPieChart: function() {
+    setPieChart: function(e) {
+        this.setActive(e);
         this.pokeRenderer = drawPieChart;
         this.renderChart();
     },
 
-    setBarChart: function() {
+    setBarChart: function(e) {
+        this.setActive(e);
         this.pokeRenderer = drawBarChart;
         this.renderChart();
     },
 
-    setRandom: function() {
+    setActive: function(e) {
+        $('.chart').removeClass('active');
+        $(e.currentTarget).addClass('active');
+    },
+
+    setRandom: function(e) {
         if (this.random) {
             this.increment = this.plusplus;
             this.decrement = this.minusminus;
@@ -31,6 +38,7 @@ const PokeView = Backbone.View.extend({
             this.decrement = this.randomPoke;
         }
 
+        $(e.currentTarget).toggleClass('active');
         this.random = !this.random;
     },
 

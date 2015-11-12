@@ -3,6 +3,7 @@ body {
 }
 
 #info {
+    color: #8e44ad;
     position: absolute;
     top: 10px;
     right: 20px;
@@ -14,6 +15,12 @@ body {
 }
 #buttons a {
     padding: 0 2px;
+}
+#buttons .fa {
+    color: #9b59b6;
+}
+#buttons .fa.active {
+    color: #1abc9c;
 }
 
 #canvas {
