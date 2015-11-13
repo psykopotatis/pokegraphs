@@ -179,8 +179,17 @@ const PokeView = Backbone.View.extend({
             this.fetchPoke();
         } else if (e.keyCode == 39) {
             // right
-            this.increment();
-            this.fetchPoke();
+            var $el = $('#canvas');
+            var that = this;
+            $('#charts').empty();
+            $el.addClass('fadeOutRight');
+            $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+                function () {
+                    $('#canvas').removeClass('fadeOutRight');
+                    that.clearCanvas();
+                    that.increment();
+                    that.fetchPoke();
+                });
         }
     }
 });
