@@ -1,0 +1,41 @@
+export default function drawColumnChart(colors) {
+    $('#charts').highcharts({
+        chart: {
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 10,
+                depth: 50,
+                viewDistance: 30
+            }
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        xAxis: {
+            type: 'category'
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: { enabled: false },
+        title: {
+            text: ''
+        },
+        plotOptions: {
+            column: {
+                depth: 30
+            }
+        },
+        credits: {
+              enabled: false
+        },
+        series: [{
+            data: this.colors
+        }]
+    });
+};

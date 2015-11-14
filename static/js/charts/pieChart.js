@@ -29,6 +29,9 @@ export default function drawPieChart(colors) {
             type: 'pie',
             backgroundColor: 'rgba(255, 255, 255, 0)'
         },
+        credits: {
+              enabled: false
+        },
         title: {
             text: ''
         },

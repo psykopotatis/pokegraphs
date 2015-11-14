@@ -1,4 +1,4 @@
-export default function drawBarChart(colors) {
+export default function drawColumnChart(colors) {
     $('#charts').highcharts({
         chart: {
             type: 'column',
@@ -15,6 +15,9 @@ export default function drawBarChart(colors) {
             title: {
                 text: ''
             }
+        },
+        credits: {
+              enabled: false
         },
         legend: {
             enabled: false

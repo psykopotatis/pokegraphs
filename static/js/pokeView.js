@@ -1,14 +1,16 @@
 var indexTemplate = require("text!./templates/index.html");
 var PokeModel = require("./pokeModel");
-var drawPieChart = require("./pieChart");
-var drawBarChart = require("./barChart");
+var drawPieChart = require("./charts/pieChart");
+var drawColumnChart = require("./charts/columnChart");
+var draw3dColumnChart = require("./charts/3d/columnChart");
 
 const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
 
     events: {
         'click .fa-pie-chart': 'setPieChart',
-        'click .fa-bar-chart': 'setBarChart',
+        'click .fa-bar-chart': 'setColumnChart',
+        'click .fa-bar-chart.3d': 'set3dColumnChart',
         'click .fa-random': 'setRandom'
     },
 
@@ -18,9 +20,15 @@ const PokeView = Backbone.View.extend({
         this.renderChart();
     },
 
-    setBarChart: function(e) {
+    setColumnChart: function(e) {
         this.setActive(e);
-        this.pokeRenderer = drawBarChart;
+        this.pokeRenderer = drawColumnChart;
+        this.renderChart();
+    },
+
+    set3dColumnChart: function(e) {
+        this.setActive(e);
+        this.pokeRenderer = draw3dColumnChart;
         this.renderChart();
     },
 
@@ -45,7 +53,7 @@ const PokeView = Backbone.View.extend({
     initialize: function() {
         $(document).keydown(_.bind(this.onKeyDown, this));
 
-        this.pokeRenderer = drawPieChart;
+        this.pokeRenderer = draw3dColumnChart;
         this.increment = this.plusplus;
         this.decrement = this.minusminus;
         this.random = false;
