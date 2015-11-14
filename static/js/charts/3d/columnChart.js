@@ -1,6 +1,7 @@
 export default function drawColumnChart(colors) {
     $('#charts').highcharts({
         chart: {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
             type: 'column',
             margin: 75,
             options3d: {
