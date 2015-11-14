@@ -36,7 +36,7 @@ def read_image(poke_id):
                 if white > candidate_lightest > lightest:
                     lightest = candidate_lightest
                     # lightest_color = hex_color
-                    lightest_color = 'rgba(%s,%s,%s,0.45)' % (r, g, b)
+                    lightest_color = 'rgba(%s,%s,%s,0.65)' % (r, g, b)
 
     most_common = Counter(all_colors).most_common()
     # Get total number of colored pixels

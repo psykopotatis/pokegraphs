@@ -123,7 +123,7 @@ const PokeView = Backbone.View.extend({
     },
 
     renderBackground() {
-        this.$el.css('background-color', this.lightest);
+        this.$el.css('background', 'linear-gradient('+ this.lightest + ', #fff)');
     },
 
     renderChart: function() {
