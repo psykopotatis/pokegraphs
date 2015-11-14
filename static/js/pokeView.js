@@ -6,12 +6,19 @@ var draw3dColumnChart = require("./charts/3d/columnChart");
 
 const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
+    MAX_POKE: 649,
 
     events: {
+        'click #canvas': 'click',
         'click .fa-pie-chart': 'setPieChart',
         'click .fa-bar-chart': 'setColumnChart',
         'click .fa-bar-chart.3d': 'set3dColumnChart',
         'click .fa-random': 'setRandom'
+    },
+
+    click: function() {
+        this.increment();
+        this.fetchPoke();
     },
 
     setPieChart: function(e) {
@@ -159,15 +166,22 @@ const PokeView = Backbone.View.extend({
     },
 
     plusplus: function() {
-        this.pokeId++;  // todo check max
+        this.pokeId++;
+        if (this.pokeId > this.MAX_POKE) {
+            this.pokeId = 1;
+        }
     },
 
     minusminus: function() {
-        this.pokeId--;  // todo check min
+        this.pokeId--;
+        if (this.pokeId == 0) {
+            this.pokeId = this.MAX_POKE;
+        }
+
     },
 
     randomPoke: function() {
-        this.pokeId = Math.round(Math.random() * 649);
+        this.pokeId = Math.round(Math.random() * this.MAX_POKE);
     },
 
     onKeyDown: function(e) {
@@ -188,16 +202,14 @@ const PokeView = Backbone.View.extend({
         } else if (e.keyCode == 39) {
             // right
             var $el = $('#canvas');
-            var that = this;
             $('#charts').empty();
             $el.addClass('fadeOutRight');
-            $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-                function () {
-                    $('#canvas').removeClass('fadeOutRight');
-                    that.clearCanvas();
-                    that.increment();
-                    that.fetchPoke();
-                });
+            $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', () => {
+                $('#canvas').removeClass('fadeOutRight');
+                this.clearCanvas();
+                this.increment();
+                this.fetchPoke();
+            });
         }
     }
 });
