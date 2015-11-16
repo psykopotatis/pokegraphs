@@ -2,25 +2,13 @@ body {
     font-family: 'Press Start 2P', cursive;
 }
 
-#info {
-    color: #8e44ad;
-    position: absolute;
-    top: 10px;
-    right: 20px;
+#pokegraphs {
+    position:relative;
+    overflow: hidden;
 }
-#buttons {
-    position: absolute;
-    top: 40px;
-    right: 20px;
-}
-#buttons a {
-    padding: 0 2px;
-}
-#buttons .fa {
-    color: #9b59b6;
-}
-#buttons .fa.active {
-    color: #1abc9c;
+
+#charts {
+    width:100%;
 }
 
 #canvas {
@@ -29,9 +17,32 @@ body {
     top: 0;
     left: 0;
 }
-#charts {
-    width:100%;
+
+#info {
+    color: #8e44ad;
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
+
+#buttons {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+
+#buttons a {
+    padding: 0 2px;
+}
+
+#buttons .fa {
+    color: #9b59b6;
+}
+
+#buttons .fa.active {
+    color: #1abc9c;
+}
+
 .color-block {
     display: block;
     width: 100px;
@@ -39,8 +50,8 @@ body {
 }
 
 .animated {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
     -webkit-animation-fill-mode: backwards;
     animation-fill-mode: backwards;
 }
@@ -52,9 +63,10 @@ body {
     }
     100% {
         opacity: 0;
-        -webkit-transform: translateX(220);
+        -webkit-transform: translateX(160px);
     }
 }
+
 @keyframes fadeOutRight {
     0% {
         opacity: 1;
@@ -62,9 +74,10 @@ body {
     }
     100% {
         opacity: 0;
-        transform: translateX(220px);
+        transform: translateX(160px);
     }
 }
+
 .fadeOutRight {
     -webkit-animation-name: fadeOutRight;
     animation-name: fadeOutRight;
