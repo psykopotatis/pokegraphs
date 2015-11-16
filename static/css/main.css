@@ -29,18 +29,17 @@ body {
     position: absolute;
     top: 40px;
     right: 20px;
-}
-#buttons .lead {
-    margin-bottom: 10px;
+    text-align: right;
 }
 
-.hidden {
-    display: none;
+#buttons .lead {
+    margin-bottom: 10px;
 }
 
 #buttons a {
     padding: 0 2px;
 }
+
 #buttons a.fb {
     padding: 0 0 0 15px;
 }
@@ -52,6 +51,10 @@ body {
 
 #buttons .fa.active {
     color: #1abc9c;
+}
+
+#facebook {
+    display: none;
 }
 
 .color-block {

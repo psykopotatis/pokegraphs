@@ -42,7 +42,7 @@ const PokeView = Backbone.View.extend({
 
     toggleFacebook: function(e) {
         $(e.currentTarget).toggleClass('active');
-        $('#facebook').toggleClass('hidden');
+        $('#facebook').slideToggle('fast');
     },
 
     setActive: function(e) {
