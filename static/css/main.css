@@ -30,10 +30,21 @@ body {
     top: 40px;
     right: 20px;
 }
+#buttons .lead {
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
 
 #buttons a {
     padding: 0 2px;
 }
+#buttons a.fb {
+    padding: 0 0 0 15px;
+}
+
 
 #buttons .fa {
     color: #9b59b6;
