@@ -14,7 +14,7 @@ const PokeView = Backbone.View.extend({
         'click .fa-bar-chart': 'setColumnChart',
         'click .fa-bar-chart.3d': 'set3dColumnChart',
         'click .fa-random': 'setRandom',
-        'click .fa-facebook-square': 'toggleFacebook'
+        'click .fa-heart': 'toggleFacebook'
     },
 
     click: function() {
