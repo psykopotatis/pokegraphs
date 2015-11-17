@@ -51,6 +51,10 @@ body {
     color: #9b59b6;
 }
 
+.fa:hover {
+    color: #8e44ad;
+}
+
 .fa.active {
     color: #1abc9c;
 }
