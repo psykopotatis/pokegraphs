@@ -18,6 +18,13 @@ body {
     left: 0;
 }
 
+#love {
+    color: #8e44ad;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+
 #info {
     color: #8e44ad;
     position: absolute;
@@ -32,7 +39,7 @@ body {
     text-align: right;
 }
 
-#buttons .lead {
+#love .lead {
     margin-bottom: 10px;
 }
 
@@ -40,16 +47,11 @@ body {
     padding: 0 2px;
 }
 
-#buttons a.fb {
-    padding: 0 0 0 15px;
-}
-
-
-#buttons .fa {
+.fa {
     color: #9b59b6;
 }
 
-#buttons .fa.active {
+.fa.active {
     color: #1abc9c;
 }
 
