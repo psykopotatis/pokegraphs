@@ -14,7 +14,8 @@ const PokeView = Backbone.View.extend({
         'click .fa-bar-chart': 'setColumnChart',
         'click .fa-bar-chart.3d': 'set3dColumnChart',
         'click .fa-random': 'setRandom',
-        'click .fa-heart': 'toggleFacebook'
+        'click .fa-heart': 'toggleFacebook',
+        'click .fa-question': 'toggleInfo'
     },
 
     click: function() {
@@ -43,6 +44,11 @@ const PokeView = Backbone.View.extend({
     toggleFacebook: function(e) {
         $(e.currentTarget).toggleClass('active');
         $('#facebook').slideToggle('fast');
+    },
+
+    toggleInfo: function(e) {
+        $(e.currentTarget).toggleClass('active');
+        $('#extraInfo').slideToggle('fast');
     },
 
     setActive: function(e) {

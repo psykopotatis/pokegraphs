@@ -37,6 +37,7 @@ body {
     top: 40px;
     right: 20px;
     text-align: right;
+    width: 100%;
 }
 
 #love .lead {
@@ -57,6 +58,16 @@ body {
 
 .fa.active {
     color: #1abc9c;
+}
+
+.fa-question {
+    padding: 0 0 0 10px;
+}
+
+#extraInfo {
+    display: none;
+    text-align: right;
+    color: #8e44ad;
 }
 
 #facebook {
