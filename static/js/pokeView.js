@@ -197,6 +197,8 @@ const PokeView = Backbone.View.extend({
     },
 
     onKeyDown: function(e) {
+        $('#extraInfo').hide('fast');
+
         e = e || window.event;
 
         if (e.keyCode == 38) {
