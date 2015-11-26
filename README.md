@@ -1,4 +1,4 @@
 # pokegraphs
 Pokemon color graphs in javascript.
 
-http://pokegraphs.appspot.com
+http://www.pokegraphs.com

@@ -1,5 +1,8 @@
-Jinja2==2.8
-MarkupSafe==0.23
-argparse==1.2.1
-webapp2==2.5.2
+Django==1.7.4
+dj-database-url==0.3.0
+dj-static==0.0.6
+django-toolbelt==0.0.1
+gunicorn==19.2.1
+static3==0.5.1
+whitenoise==1.0.6
 wsgiref==0.1.2

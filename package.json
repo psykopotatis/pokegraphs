@@ -1,7 +1,7 @@
 {
-  "name": "pokequiz",
+  "name": "pokegraphs",
   "version": "1.0.0",
-  "description": "pokequiz",
+  "description": "pokegraphs",
   "private": true,
   "main": "webpack.config.js",
   "scripts": {
