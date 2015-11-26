@@ -13,10 +13,5 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_name.settings")
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
-"""
-Adding whitenoise. Application will now serve static assets directly from Gunicorn in production.
-This will be perfectly adequate for most applications, but top-tier applications
-may want to explore using a CDN with Django-Storages.
-"""
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)

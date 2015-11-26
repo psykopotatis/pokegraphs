@@ -1,8 +1,13 @@
 Django==1.7.4
+argparse==1.2.1
 dj-database-url==0.3.0
 dj-static==0.0.6
+django-pylibmc==0.5.0
 django-toolbelt==0.0.1
 gunicorn==19.2.1
+psycopg2==2.6
+pylibmc==1.4.1
+slugify==0.0.1
 static3==0.5.1
 whitenoise==1.0.6
 wsgiref==0.1.2
