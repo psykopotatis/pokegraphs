@@ -28,14 +28,22 @@ body {
 #info {
     color: #8e44ad;
     position: absolute;
-    top: 10px;
+    top: 12px;
     right: 20px;
+}
+#info input {
+    color: #8e44ad;
+}
+.ui-widget {
+    color: #8e44ad;
+    font-family: 'Press Start 2P', cursive;
+    font-size:14px;
 }
 
 #buttons {
     position: absolute;
-    top: 40px;
-    right: 20px;
+    top: 44px;
+    right: 22px;
     text-align: right;
     width: 100%;
 }

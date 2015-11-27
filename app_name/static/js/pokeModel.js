@@ -4,6 +4,10 @@ var PokeModel = Backbone.Model.extend({
 
     getName: function(id) {
         return this.names[id];
+    },
+
+    getNames: function() {
+        return this.names;
     }
 });
 

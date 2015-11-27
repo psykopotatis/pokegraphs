@@ -14,7 +14,9 @@ const PokeView = Backbone.View.extend({
         'click .fa-bar-chart.3d': 'set3dColumnChart',
         'click .fa-random': 'setRandom',
         'click .fa-heart': 'toggleFacebook',
-        'click .fa-question': 'toggleInfo'
+        'click .fa-question': 'toggleInfo',
+        'focus #pokeInput' : 'focusPokeInput',
+        'blur #pokeInput' : 'blurPokeInput'
     },
 
     click: function() {
@@ -48,6 +50,14 @@ const PokeView = Backbone.View.extend({
     toggleInfo: function(e) {
         $(e.currentTarget).toggleClass('active');
         $('#extraInfo').slideToggle('fast');
+    },
+
+    focusPokeInput: function() {
+        $(document).unbind();
+    },
+
+    blurPokeInput: function() {
+        $(document).keydown(_.bind(this.onKeyDown, this));
     },
 
     setActive: function(e) {
@@ -86,7 +96,10 @@ const PokeView = Backbone.View.extend({
         this.calculateChartHeight();
 
         this.randomPoke();
+        this.createPokeModel();
         this.fetchPoke();
+
+        this.initAutocomplete();
     },
 
     calculateZoom: function() {
@@ -103,10 +116,36 @@ const PokeView = Backbone.View.extend({
         $('#charts').css('height', window.innerHeight);
     },
 
-    fetchPoke: function() {
-        this.pokeModel = new PokeModel({ id: this.pokeId + '.json' });
+    createPokeModel: function() {
+        this.pokeModel = new PokeModel();
+    },
+
+    updatePokeModel: function() {
+        this.pokeModel.set('id',this.pokeId + '.json' );
+    },
+
+    updatePokeName: function() {
         const name = this.pokeModel.getName(this.pokeId);
-        this.$el.find('#info .name').html(this.pokeId + '.' + name);
+        this.$el.find('#pokeInput').val(name);
+    },
+
+    initAutocomplete: function() {
+        $("#pokeInput").autocomplete({
+            minLength: 2,
+            source: this.pokeModel.getNames(),
+            select: (event, ui) => {
+                this.pokeId = _.indexOf(this.pokeModel.getNames(), ui.item.value);
+                this.fetchPoke();
+
+                $('#pokeInput').blur();
+                return false;
+            }
+        });
+    },
+
+    fetchPoke: function() {
+        this.updatePokeModel();
+        this.updatePokeName();
 
         this.pokeModel.fetch({
             success: (model) => {
@@ -192,6 +231,7 @@ const PokeView = Backbone.View.extend({
 
     onKeyDown: function(e) {
         $('#extraInfo').hide('fast');
+        $('.fa-question').removeClass('active');
 
         e = e || window.event;
 
