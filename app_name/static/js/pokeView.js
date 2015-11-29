@@ -1,27 +1,21 @@
-var PokeModel = require("./pokeModel");
 var drawPieChart = require("./charts/pieChart");
 var drawColumnChart = require("./charts/columnChart");
 var draw3dColumnChart = require("./charts/3d/columnChart");
+var keyboard = require("./keyboard");
 
 const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
     MAX_POKE: 649,
 
     events: {
-        'click #canvas': 'click',
         'click .fa-pie-chart': 'setPieChart',
         'click .fa-bar-chart': 'setColumnChart',
         'click .fa-bar-chart.3d': 'set3dColumnChart',
-        'click .fa-random': 'setRandom',
+        'click .fa-random': 'toggleRandom',
         'click .fa-heart': 'toggleFacebook',
         'click .fa-question': 'toggleInfo',
         'focus #pokeInput' : 'focusPokeInput',
         'blur #pokeInput' : 'blurPokeInput'
-    },
-
-    click: function() {
-        this.increment();
-        this.fetchPoke();
     },
 
     setPieChart: function(e) {
@@ -65,26 +59,14 @@ const PokeView = Backbone.View.extend({
         $(e.currentTarget).addClass('active');
     },
 
-    setRandom: function(e) {
-        if (this.random) {
-            this.increment = this.plusplus;
-            this.decrement = this.minusminus;
-        } else {
-            this.increment = this.randomPoke;
-            this.decrement = this.randomPoke;
-        }
-
+    toggleRandom: function(e) {
+        this.pokeModel.toggleRandom();
         $(e.currentTarget).toggleClass('active');
-        this.random = !this.random;
     },
 
-    initialize: function() {
-        $(document).keydown(_.bind(this.onKeyDown, this));
-
+    initialize: function(opts) {
+        this.pokeModel = opts.pokeModel;
         this.pokeRenderer = draw3dColumnChart;
-        this.increment = this.plusplus;
-        this.decrement = this.minusminus;
-        this.random = false;
 
         this.canvas = document.getElementById('canvas');
         this.canvas.width = window.innerWidth;
@@ -95,11 +77,7 @@ const PokeView = Backbone.View.extend({
         this.calculateCenter();
         this.calculateChartHeight();
 
-        this.randomPoke();
-        this.createPokeModel();
-        this.fetchPoke();
-
-        this.initAutocomplete();
+        $(document).keydown(_.bind(this.onKeyDown, this));
     },
 
     calculateZoom: function() {
@@ -116,49 +94,17 @@ const PokeView = Backbone.View.extend({
         $('#charts').css('height', window.innerHeight);
     },
 
-    createPokeModel: function() {
-        this.pokeModel = new PokeModel();
-    },
+    updatePokeData: function(opts) {
+        this.pixels = opts.pixels;
+        this.colors = opts.colors;
+        this.lightest = opts.lightest;
 
-    updatePokeModel: function() {
-        this.pokeModel.set('id',this.pokeId + '.json' );
+        this.updatePokeName();
     },
 
     updatePokeName: function() {
-        const name = this.pokeModel.getName(this.pokeId);
+        const name = this.pokeModel.getCurrentPoke();
         this.$el.find('#pokeInput').val(name);
-    },
-
-    initAutocomplete: function() {
-        $("#pokeInput").autocomplete({
-            minLength: 2,
-            source: this.pokeModel.getNames(),
-            select: (event, ui) => {
-                this.pokeId = _.indexOf(this.pokeModel.getNames(), ui.item.value);
-                this.fetchPoke();
-
-                $('#pokeInput').blur();
-                return false;
-            }
-        });
-    },
-
-    fetchPoke: function() {
-        this.updatePokeModel();
-        this.updatePokeName();
-
-        this.pokeModel.fetch({
-            success: (model) => {
-                this.pixels = model.get('pixels');
-                this.colors = model.get('colors');
-                this.lightest = model.get('lightest');
-
-                this.render();
-            },
-            error: (model, response) => {
-                console.log('error', model, response);
-            }
-        });
     },
 
     render: function() {
@@ -180,20 +126,6 @@ const PokeView = Backbone.View.extend({
         this.pokeRenderer(this.colors);
     },
 
-    renderColorBlocks: function() {
-        _.each(this.colors, (color) => {
-            this.$el.find('#blocks').append('<div class="color-block" style="background-color:' + color + '" />');
-        });
-
-        this.setColorBlockHeights();
-    },
-
-    setColorBlockHeights: function() {
-        this.$el.find('#blocks').css('height', window.innerHeight + 'px');
-        const blockHeight = (window.innerHeight / this.colors.length) / window.innerHeight * 100;
-        this.$el.find('.color-block').css('height', blockHeight + '%');
-    },
-
     renderPokemon: function() {
         for (let x=0; x < 96; x++) {
             for (let y=0; y < 96; y++) {
@@ -210,55 +142,45 @@ const PokeView = Backbone.View.extend({
         this.context.fillRect(x, y, this.zoom, this.zoom);
     },
 
-    plusplus: function() {
-        this.pokeId++;
-        if (this.pokeId > this.MAX_POKE) {
-            this.pokeId = 1;
-        }
-    },
-
-    minusminus: function() {
-        this.pokeId--;
-        if (this.pokeId == 0) {
-            this.pokeId = this.MAX_POKE;
-        }
-
-    },
-
-    randomPoke: function() {
-        this.pokeId = Math.round(Math.random() * this.MAX_POKE);
-    },
-
     onKeyDown: function(e) {
         $('#extraInfo').hide('fast');
         $('.fa-question').removeClass('active');
 
         e = e || window.event;
 
-        if (e.keyCode == 38) {
-            // up
-            this.increment();
-            this.fetchPoke();
-        } else if (e.keyCode == 40) {
-            // down
-            this.decrement();
-            this.fetchPoke();
-        } else if (e.keyCode == 37) {
-            // left
-            this.decrement();
-            this.fetchPoke();
-        } else if (e.keyCode == 39) {
-            // right
-            var $el = $('#canvas');
-            $('#charts').empty();
-            $el.addClass('fadeOutRight');
-            $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', () => {
-                $('#canvas').removeClass('fadeOutRight');
-                this.clearCanvas();
-                this.increment();
-                this.fetchPoke();
-            });
+        switch(e.keyCode) {
+            case(keyboard.UP):
+                this.pokeModel.increment();
+                break;
+            case(keyboard.DOWN):
+            case(keyboard.LEFT):
+                this.pokeModel.decrement();
+                break;
+            case(keyboard.RIGHT):
+                var $el = $('#canvas');
+                $('#charts').empty();
+                $el.addClass('fadeOutRight');
+                $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', () => {
+                    $('#canvas').removeClass('fadeOutRight');
+                    this.clearCanvas();
+                    this.pokeModel.increment();
+                });
+                break;
         }
+    },
+
+    renderColorBlocks: function() {
+        _.each(this.colors, (color) => {
+            this.$el.find('#blocks').append('<div class="color-block" style="background-color:' + color + '" />');
+        });
+
+        this.setColorBlockHeights();
+    },
+
+    setColorBlockHeights: function() {
+        this.$el.find('#blocks').css('height', window.innerHeight + 'px');
+        const blockHeight = (window.innerHeight / this.colors.length) / window.innerHeight * 100;
+        this.$el.find('.color-block').css('height', blockHeight + '%');
     }
 });
 

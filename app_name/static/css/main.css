@@ -39,6 +39,9 @@ body {
     font-family: 'Press Start 2P', cursive;
     font-size:14px;
 }
+.ui-widget .ui-menu-item {
+    padding-left: 11px;
+}
 
 #buttons {
     position: absolute;
