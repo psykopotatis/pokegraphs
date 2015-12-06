@@ -31,6 +31,14 @@ body {
     top: 12px;
     right: 20px;
 }
+@media (max-width: 728px) {
+    #info {
+        top: 0;
+        right: 0;
+        margin: 5px;
+    }
+}
+
 #info input {
     color: #8e44ad;
 }
@@ -49,6 +57,12 @@ body {
     right: 22px;
     text-align: right;
     width: 100%;
+}
+@media (max-width: 728px) {
+    #buttons {
+        top: 40px;
+        right: 6px;
+    }
 }
 
 #love .lead {
