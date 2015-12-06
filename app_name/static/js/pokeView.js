@@ -78,12 +78,13 @@ const PokeView = Backbone.View.extend({
         this.calculateCenter();
         this.calculateChartHeight();
 
-        console.log('isMobile', isMobile());
         if (isMobile()) {
             document.addEventListener('touchstart', _.bind(this.handleTouchStart, this), false);
             document.addEventListener('touchmove', _.bind(this.handleTouchMove, this), false);
             this.xDown = null;
             this.yDown = null;
+            // Update instructions
+            $('#extraInfo').html('Swipe left/right');
         } else {
             $(document).keydown(_.bind(this.onKeyDown, this));
         }
@@ -123,6 +124,8 @@ const PokeView = Backbone.View.extend({
         /* reset values */
         this.xDown = null;
         this.yDown = null;
+
+        this.hideExtraInfo();
     },
 
     calculateZoom: function() {
@@ -188,8 +191,7 @@ const PokeView = Backbone.View.extend({
     },
 
     onKeyDown: function(e) {
-        $('#extraInfo').hide('fast');
-        $('.fa-question').removeClass('active');
+        this.hideExtraInfo();
 
         e = e || window.event;
 
@@ -205,6 +207,11 @@ const PokeView = Backbone.View.extend({
                 this.animatedIncrement();
                 break;
         }
+    },
+
+    hideExtraInfo: function() {
+        $('#extraInfo').hide('fast');
+        $('.fa-question').removeClass('active');
     },
 
     animatedIncrement: function() {
