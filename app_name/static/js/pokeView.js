@@ -98,14 +98,14 @@ const PokeView = Backbone.View.extend({
         hammertime.on('panleft', function() {
             if (! panning) {
                 panning = true;
-                that.animatedIncrement();
+                that.pokeModel.decrement();
             }
         });
 
         hammertime.on('panright', function() {
             if (! panning) {
                 panning = true;
-                that.pokeModel.decrement();
+                that.animatedIncrement();
             }
         });
 
