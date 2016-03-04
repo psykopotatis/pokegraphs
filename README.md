@@ -24,12 +24,12 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
     
     <li>
-    Django: Collect and process all static files<br/> 
+    Django: Collect and process all static files. Type 'yes'<br/> 
     <code>python manage.py collectstatic</code>
     </li>
     
     <li>
-    Django: Starts lightweight development Web server on the local machine<br/>
+    Django: Start lightweight development Web server on the local machine<br/>
     <code>python manage.py runserver</code>
     </li>
     
