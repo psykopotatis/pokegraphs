@@ -24,11 +24,6 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
     
     <li>
-    Apply migrations<br/>
-    <code>python manage.py migrate</code>
-    </li>
-
-    <li>
     Starts a lightweight development Web server on the local machine<br/>
     <code>python manage.py runserver</code>
     </li>
@@ -39,7 +34,7 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
 </ol>
 
 <strong>TL;DR</strong><br/>
-<code>virtualenv venv;source venv/bin/activate;pip install -r requirements.txt;python manage.py migrate;python manage.py runserver</code>
+<code>virtualenv venv;source venv/bin/activate;pip install -r requirements.txt;python manage.py runserver</code>
 
 To run webpack and recompile javascripts on change:
 
