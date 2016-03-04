@@ -3,15 +3,13 @@ Pokemon pixel color graphs in javascript.
 
 http://www.pokegraphs.com
 
-Python and Django 1.7.4 website that is currently run on Heroku.
-
 <strong>How do I run this locally?</strong>
 
 You will need [Python](https://www.python.org) and [virtualenv](https://virtualenv.readthedocs.org/en/latest).
 
 <ol>
     <li>
-    Create virtual environment<br/>
+    Create isolated virtual Python environment<br/>
     <code>virtualenv venv</code>
     </li>
 
@@ -21,7 +19,7 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
 
     <li>
-    Install all requirements<br/>
+    Install Django and all requirements<br/>
     <code>pip install -r requirements.txt</code>
     </li>
     
@@ -31,7 +29,7 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
 
     <li>
-    Run<br/>
+    Starts a lightweight development Web server on the local machine<br/>
     <code>python manage.py runserver</code>
     </li>
 </ol>
