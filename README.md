@@ -24,17 +24,23 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
     
     <li>
-    Starts a lightweight development Web server on the local machine<br/>
+    Django: Collect and process all static files 
+    <code>python manage.py collectstatic</code>
+    </li>
+    
+    <li>
+    Django: Starts lightweight development Web server on the local machine<br/>
     <code>python manage.py runserver</code>
     </li>
     
     <li>
-    Go to http://127.0.0.1:8000  
+    Go here: 
+    http://127.0.0.1:8000  
     </li>
 </ol>
 
 <strong>TL;DR</strong><br/>
-<code>virtualenv venv;source venv/bin/activate;pip install -r requirements.txt;python manage.py runserver</code>
+<code>virtualenv venv;source venv/bin/activate;pip install -r requirements.txt;python manage.py collectstatic;python manage.py runserver</code>
 
 To run webpack and recompile javascripts on change:
 
