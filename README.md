@@ -1,11 +1,13 @@
 # pokegraphs
-Pokemon color graphs in javascript.
+Pokemon pixel color graphs in javascript.
 
 http://www.pokegraphs.com
 
-## How do I run this locally?
+Python and Django 1.7.4 website that is currently run on Heroku.
 
-You will need [Python](https://www.python.org) and [virtualenv](https://virtualenv.readthedocs.org/en/latest)
+<strong>How do I run this locally?</strong>
+
+You will need [Python](https://www.python.org) and [virtualenv](https://virtualenv.readthedocs.org/en/latest).
 
 <ol>
     <li>
@@ -46,7 +48,7 @@ To run webpack and recompile javascripts on change:
     </li>
     
     <li>
-    Start webpack watcher
+    Start webpack watcher<br/>
     <code>webpack --progress --colors --watch</code>
     </li>
 </ol>
