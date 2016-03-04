@@ -24,7 +24,7 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
     
     <li>
-    Django: Collect and process all static files 
+    Django: Collect and process all static files<br/> 
     <code>python manage.py collectstatic</code>
     </li>
     
@@ -34,7 +34,7 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     </li>
     
     <li>
-    Go here: 
+    Your shiny new pokegraphs site should live here! :D<br/>
     http://127.0.0.1:8000  
     </li>
 </ol>
