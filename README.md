@@ -32,6 +32,10 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
     Starts a lightweight development Web server on the local machine<br/>
     <code>python manage.py runserver</code>
     </li>
+    
+    <li>
+    Go to http://127.0.0.1:8000  
+    </li>
 </ol>
 
 <strong>TL;DR</strong><br/>
