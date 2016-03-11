@@ -9,14 +9,14 @@ const PokeView = Backbone.View.extend({
     MAX_POKE: 649,
 
     events: {
-        'click .fa-pie-chart': 'setPieChart',
-        'click .fa-bar-chart': 'setColumnChart',
-        'click .fa-bar-chart.3d': 'set3dColumnChart',
-        'click .fa-random': 'toggleRandom',
-        'click .fa-heart': 'toggleFacebook',
-        'click .fa-question': 'toggleInfo',
-        'focus #pokeInput' : 'focusPokeInput',
-        'blur #pokeInput' : 'blurPokeInput'
+        'click .fa-pie-chart':      'setPieChart',
+        'click .fa-bar-chart':      'setColumnChart',
+        'click .fa-bar-chart.3d':   'set3dColumnChart',
+        'click .fa-random':         'toggleRandom',
+        'click .fa-times-circle':   'hideFacebook',
+        'click .fa-question':       'toggleInfo',
+        'focus #pokeInput' :        'focusPokeInput',
+        'blur #pokeInput' :         'blurPokeInput'
     },
 
     setPieChart: function(e) {
@@ -37,7 +37,7 @@ const PokeView = Backbone.View.extend({
         this.renderChart();
     },
 
-    toggleFacebook: function(e) {
+    hideFacebook: function(e) {
         $(e.currentTarget).toggleClass('active');
         $('#facebook').slideToggle('fast');
     },
