@@ -216,20 +216,6 @@ const PokeView = Backbone.View.extend({
             this.clearCanvas();
             this.pokeModel.decrement();
         });
-    },
-
-    renderColorBlocks: function() {
-        _.each(this.colors, (color) => {
-            this.$el.find('#blocks').append('<div class="color-block" style="background-color:' + color + '" />');
-        });
-
-        this.setColorBlockHeights();
-    },
-
-    setColorBlockHeights: function() {
-        this.$el.find('#blocks').css('height', window.innerHeight + 'px');
-        const blockHeight = (window.innerHeight / this.colors.length) / window.innerHeight * 100;
-        this.$el.find('.color-block').css('height', blockHeight + '%');
     }
 });
 
