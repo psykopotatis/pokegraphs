@@ -98,7 +98,7 @@ const PokeView = Backbone.View.extend({
         hammertime.on('panleft', function() {
             if (! panning) {
                 panning = true;
-                that.pokeModel.decrement();
+                that.animatedDecrement();
             }
         });
 
@@ -182,12 +182,8 @@ const PokeView = Backbone.View.extend({
         e = e || window.event;
 
         switch(e.keyCode) {
-            case(keyboard.UP):
-                this.pokeModel.increment();
-                break;
-            case(keyboard.DOWN):
             case(keyboard.LEFT):
-                this.pokeModel.decrement();
+                this.animatedDecrement();
                 break;
             case(keyboard.RIGHT):
                 this.animatedIncrement();
@@ -208,6 +204,17 @@ const PokeView = Backbone.View.extend({
             $('#canvas').removeClass('fadeOutRight');
             this.clearCanvas();
             this.pokeModel.increment();
+        });
+    },
+
+    animatedDecrement: function() {
+        var $el = $('#canvas');
+        $('#charts').empty();
+        $el.addClass('fadeOutLeft');
+        $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', () => {
+            $('#canvas').removeClass('fadeOutLeft');
+            this.clearCanvas();
+            this.pokeModel.decrement();
         });
     },
 
