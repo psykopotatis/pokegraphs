@@ -5,7 +5,7 @@
   "private": true,
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --progress --display-modules --watch"
   },
   "author": "Ingemar (iingemar@gmail.com)",
   "license": "ISC",
