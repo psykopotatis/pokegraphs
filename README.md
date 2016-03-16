@@ -42,6 +42,8 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
 <strong>TL;DR</strong><br/>
 <code>virtualenv venv;source venv/bin/activate;pip install -r requirements.txt;python manage.py collectstatic;python manage.py runserver</code>
 
+<strong>webpack</strong><br/>
+
 To run webpack and recompile javascripts on change:
 
 <ol>
@@ -52,7 +54,7 @@ To run webpack and recompile javascripts on change:
     
     <li>
     Start webpack watcher<br/>
-    <code>webpack --progress --colors --watch</code>
+    <code>npm start</code>
     </li>
 </ol>
 
