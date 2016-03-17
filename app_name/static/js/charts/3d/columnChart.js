@@ -1,3 +1,5 @@
+"use strict";
+
 export default function drawColumnChart(colors) {
     $('#charts').highcharts({
         chart: {
@@ -36,7 +38,7 @@ export default function drawColumnChart(colors) {
               enabled: false
         },
         series: [{
-            data: this.colors
+            data: colors
         }]
     });
-};
+}

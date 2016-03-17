@@ -1,3 +1,5 @@
+"use strict";
+
 var PokeModel = require("./pokeModel");
 var PokeView = require('./pokeView');
 
@@ -9,7 +11,7 @@ $(document).ready(function() {
         }
     });
 
-    var appRouter = new AppRouter;
+    var appRouter = new AppRouter();
     var pokeModel = new PokeModel();
     var view = new PokeView({
         pokeModel: pokeModel

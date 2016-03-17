@@ -41,4 +41,4 @@ export default function drawPieChart(colors) {
             data: data
         }]
     });
-};
+}

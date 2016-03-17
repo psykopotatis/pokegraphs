@@ -1,3 +1,5 @@
+"use strict";
+
 var drawPieChart = require("./charts/pieChart");
 var drawColumnChart = require("./charts/columnChart");
 var draw3dColumnChart = require("./charts/3d/columnChart");
@@ -152,7 +154,7 @@ const PokeView = Backbone.View.extend({
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
 
-    renderBackground() {
+    renderBackground: function() {
         this.$el.css('background', 'linear-gradient('+ this.lightest + ', #fff)');
     },
 

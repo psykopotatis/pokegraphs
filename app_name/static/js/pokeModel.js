@@ -1,3 +1,5 @@
+"use strict";
+
 var PokeModel = Backbone.Model.extend({
     pokeId: 0,
     random: false,
@@ -57,7 +59,7 @@ var PokeModel = Backbone.Model.extend({
 
     minusminus: function() {
         var pokeId = this.get('pokeId') - 1;
-        if (pokeId == 0) {
+        if (pokeId === 0) {
             pokeId = this.MAX_POKE;
         }
         this.set('pokeId', pokeId);

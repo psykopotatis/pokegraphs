@@ -1,3 +1,5 @@
+"use strict";
+
 export default function drawColumnChart(colors) {
     $('#charts').highcharts({
         chart: {
@@ -39,4 +41,4 @@ export default function drawColumnChart(colors) {
         }]
 
     });
-};
+}
