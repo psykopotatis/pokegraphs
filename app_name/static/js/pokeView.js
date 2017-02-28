@@ -136,11 +136,16 @@ const PokeView = Backbone.View.extend({
         this.lightest = opts.lightest;
 
         this.updatePokeName();
+        this.updatePokeId();
     },
 
     updatePokeName: function() {
         const name = this.pokeModel.getCurrentPoke();
         this.$el.find('#pokeInput').val(name);
+    },
+
+    updatePokeId: function() {
+        this.$el.find('#pokeId').html('#' + this.pokeModel.getPokeId());
     },
 
     render: function() {

@@ -95,6 +95,15 @@ body {
     color: #8e44ad;
 }
 
+#pokeId {
+    color: #8e44ad;
+    position: absolute;
+    top: 8px;
+    right: 236px;
+    width:56px;
+    text-align: left;
+}
+
 .color-block {
     display: block;
     width: 100px;
