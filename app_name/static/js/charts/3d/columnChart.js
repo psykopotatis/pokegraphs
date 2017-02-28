@@ -39,6 +39,11 @@ export default function drawColumnChart(colors) {
         },
         series: [{
             data: colors
-        }]
+        }],
+        tooltip: {
+            formatter: function () {
+                return this.point.name + ' <b>' + Math.round(this.y * 10) / 10 + '%</b>';
+            }
+        }
     });
 }

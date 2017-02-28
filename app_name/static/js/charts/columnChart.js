@@ -38,7 +38,11 @@ export default function drawColumnChart(colors) {
             name: 'Brands',
             colorByPoint: true,
             data: colors
-        }]
-
+        }],
+        tooltip: {
+            formatter: function () {
+                return 'Color <b>' + this.point.name + '</b> is ' + this.y;
+            }
+        }
     });
 }

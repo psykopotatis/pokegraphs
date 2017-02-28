@@ -39,6 +39,11 @@ export default function drawPieChart(colors) {
         series: [{
             type: 'pie',
             data: data
-        }]
+        }],
+        tooltip: {
+            formatter: function () {
+                return this.point.name + ' <b>' + Math.round(this.y * 10) / 10 + '%</b>';
+            }
+        }
     });
 }
