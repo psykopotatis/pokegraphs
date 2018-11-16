@@ -1,10 +1,10 @@
 "use strict";
 
-var drawPieChart = require("./charts/pieChart");
-var drawColumnChart = require("./charts/columnChart");
-var draw3dColumnChart = require("./charts/3d/columnChart");
-var keyboard = require("./keyboard");
-var isMobile = require("./mobile");
+import drawPieChart from "./charts/pieChart";
+import drawColumnChart from "./charts/columnChart";
+import draw3dColumnChart from "./charts/3d/columnChart";
+import keyboard from "./keyboard";
+import isMobile from "./mobile";
 
 const PokeView = Backbone.View.extend({
     el: $('#pokegraphs'),
@@ -89,9 +89,9 @@ const PokeView = Backbone.View.extend({
     },
 
     handleTouchEvents: function() {
-        var that = this;
-        var panning = false;
-        var hammertime = new Hammer(this.canvas);
+        const that = this;
+        let panning = false;
+        const hammertime = new Hammer(this.canvas);
 
         hammertime.on('panstart', function() {
             that.hideExtraInfo();
@@ -204,7 +204,7 @@ const PokeView = Backbone.View.extend({
     },
 
     animatedIncrement: function() {
-        var $el = $('#canvas');
+        const $el = $('#canvas');
         $('#charts').empty();
         $el.addClass('fadeOutRight');
         $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', () => {
@@ -215,7 +215,7 @@ const PokeView = Backbone.View.extend({
     },
 
     animatedDecrement: function() {
-        var $el = $('#canvas');
+        const $el = $('#canvas');
         $('#charts').empty();
         $el.addClass('fadeOutLeft');
         $el.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', () => {

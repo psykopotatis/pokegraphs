@@ -1,6 +1,6 @@
 "use strict";
 
-var PokeModel = Backbone.Model.extend({
+const PokeModel = Backbone.Model.extend({
     pokeId: 0,
     random: false,
     MAX_POKE: 649,

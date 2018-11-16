@@ -1,24 +1,24 @@
 "use strict";
 
-var PokeModel = require("./pokeModel");
-var PokeView = require('./pokeView');
+import PokeModel  from './pokeModel';
+import PokeView from './pokeView';
 
 $(document).ready(function() {
-    var AppRouter = Backbone.Router.extend({
+    const AppRouter = Backbone.Router.extend({
         routes: {
             '':        'defaultRoute',
             '*poke':   'pokeRoute'
         }
     });
 
-    var appRouter = new AppRouter();
-    var pokeModel = new PokeModel();
-    var view = new PokeView({
+    const appRouter = new AppRouter();
+    const pokeModel = new PokeModel();
+    const view = new PokeView({
         pokeModel: pokeModel
     });
 
     pokeModel.on('change:pokeId', function() {
-        var currentPoke = this.getCurrentPoke();
+        const currentPoke = this.getCurrentPoke();
         appRouter.navigate(currentPoke, {trigger: true});
     });
 
@@ -33,7 +33,7 @@ $(document).ready(function() {
     });
 
     appRouter.on('route:defaultRoute', function() {
-        var randomPoke = pokeModel.getRandomPoke();
+        const randomPoke = pokeModel.getRandomPoke();
         appRouter.navigate(randomPoke, {trigger: true});
     });
 
