@@ -7,32 +7,20 @@ http://www.pokegraphs.com
 
 You will need [Python](https://www.python.org) and [virtualenv](https://virtualenv.readthedocs.org/en/latest).
 
-<ol>
-    <li>
-    Create isolated virtual Python environment<br/>
+*    Create isolated virtual Python environment<br/>
     <code>virtualenv venv</code>
-    </li>
 
-    <li>
-    Start virtual environment<br/>
+*   Start virtual environment<br/>
     <code>source venv/bin/activate</code>
-    </li>
 
-    <li>
-    Install Django and all requirements<br/>
+*    Install Django and all requirements<br/>
     <code>pip install -r requirements.txt</code>
-    </li>
     
-    <li>
-    Django: Start lightweight development Web server on the local machine<br/>
+*    Django: Start lightweight development Web server on the local machine<br/>
     <code>python manage.py runserver</code>
-    </li>
     
-    <li>
-    Your shiny new pokegraphs site should live here! :D<br/>
+*    Your shiny new pokegraphs site should live here! :D<br/>
     http://127.0.0.1:8000  
-    </li>
-</ol>
 
 <strong>TL;DR</strong><br/>
 <code>virtualenv venv;source venv/bin/activate;pip install -r requirements.txt;python manage.py runserver</code>
@@ -41,16 +29,10 @@ You will need [Python](https://www.python.org) and [virtualenv](https://virtuale
 
 To run webpack and recompile javascripts on change:
 
-<ol>
-    <li>
-    Open another terminal. Install all npm dependencies<br/>
+*    Open another terminal. Install all npm dependencies<br/>
     <code>npm install</code>
-    </li>
-    
-    <li>
-    Start webpack watcher<br/>
-    <code>npm start</code>
-    </li>
-</ol>
+
+*    Start webpack watcher<br/>
+    <code>npm run dev</code>
 
 
