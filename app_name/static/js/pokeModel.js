@@ -1,5 +1,3 @@
-"use strict";
-
 const PokeModel = Backbone.Model.extend({
     pokeId: 0,
     random: false,

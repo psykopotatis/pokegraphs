@@ -1,5 +1,3 @@
-"use strict";
-
 const isMobile = function() {
     let check = false;
     (function(a) {

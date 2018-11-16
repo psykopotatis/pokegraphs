@@ -1,7 +1,9 @@
-"use strict";
-
+import $ from 'jquery';
+import 'jquery-ui/ui/core';
+import 'jquery-ui/ui/widgets/autocomplete';
 import PokeModel  from './pokeModel';
 import PokeView from './pokeView';
+
 
 $(document).ready(function() {
     const AppRouter = Backbone.Router.extend({

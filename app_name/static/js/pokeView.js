@@ -1,5 +1,7 @@
 "use strict";
 
+import $ from 'jquery';
+import 'hammerjs';
 import drawPieChart from "./charts/pieChart";
 import drawColumnChart from "./charts/columnChart";
 import draw3dColumnChart from "./charts/3d/columnChart";
@@ -93,7 +95,7 @@ const PokeView = Backbone.View.extend({
         let panning = false;
         const hammertime = new Hammer(this.canvas);
 
-        hammertime.on('panstart', function() {
+        hammertime.on('pan panstart', function() {
             that.hideExtraInfo();
         });
 

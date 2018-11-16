@@ -82,7 +82,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].css'
+            filename: '[name].min.css'
         }),
         new webpack.ProvidePlugin({
             "_": "underscore",

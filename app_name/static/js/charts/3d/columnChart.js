@@ -1,7 +1,8 @@
-"use strict";
+import Highcharts from 'highcharts';
+
 
 export default function drawColumnChart(colors) {
-    $('#charts').highcharts({
+    Highcharts.chart('charts', {
         chart: {
             backgroundColor: 'rgba(255, 255, 255, 0)',
             type: 'column',

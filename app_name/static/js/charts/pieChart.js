@@ -1,8 +1,11 @@
-export default function drawPieChart(colors) {
-    var data = [];
-    var plotColors = [];
+import Highcharts from "highcharts";
 
-    for (var i=0; i<colors.length; i++) {
+
+export default function drawPieChart(colors) {
+    const data = [];
+    const plotColors = [];
+
+    for (let i=0; i<colors.length; i++) {
         plotColors.push(colors[i].color);
 
         if (i === 0) {
@@ -24,7 +27,7 @@ export default function drawPieChart(colors) {
         colors: plotColors
     });
 
-    $('#charts').highcharts({
+    Highcharts.chart('charts', {
         chart: {
             type: 'pie',
             backgroundColor: 'rgba(255, 255, 255, 0)'
