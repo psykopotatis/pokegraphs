@@ -1,4 +1,6 @@
 import Highcharts from 'highcharts';
+import highcharts3d from 'highcharts/highcharts-3d';
+highcharts3d(Highcharts);
 
 
 export default function drawColumnChart(colors) {
