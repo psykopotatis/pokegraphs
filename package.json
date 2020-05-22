@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
     "server": "webpack-dev-server --open --mode development",
-    "deploy": "npm run build"
+    "deploy": "npm run build && surge public pokegraphs.surge.sh"
   },
   "author": "",
   "license": "ISC",
@@ -36,7 +36,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
-    "surge": "^0.20.1",
+    "surge": "^0.20.5",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
