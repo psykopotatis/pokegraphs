@@ -1,7 +1,7 @@
 # pokegraphs
 Pokemon pixel color graphs in javascript.
 
-https://www.pokegraphs.com
+http://www.pokegraphs.com
 
 <strong>How do I run this locally?</strong>
 
