@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -6,10 +7,10 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
     entry: {
-        bundle: "./app_name/static/js/entry.js",
+        bundle: "./src/entry.js",
     },
     output: {
-        path: path.resolve(__dirname, './app_name/static/js/build'),
+        path: path.resolve(__dirname, './public'),
         // Save with the key from the entry section. Ie bundle.js, vendor.js
         // Chunkhash is a hash of the contents of the file.
         filename: '[name].min.js'
@@ -81,6 +82,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'index.html'),
+            filename: './index.html'
+
+        }),
         new MiniCssExtractPlugin({
             filename: '[name].min.css'
         }),
@@ -88,5 +94,9 @@ module.exports = {
             "_": "underscore",
             "Backbone": "backbone"
         })
-    ]
+    ],
+    devServer: {
+        port: 8081,
+        contentBase: path.join(__dirname, 'public')
+    },
 };
