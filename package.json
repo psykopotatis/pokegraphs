@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
     "server": "webpack-dev-server --open --mode development",
-    "deploy": "npm run build && surge public pokegraphs.surge.sh"
+    "deploy": "npm run build && surge public www.pokegraphs.com"
   },
   "author": "",
   "license": "ISC",
